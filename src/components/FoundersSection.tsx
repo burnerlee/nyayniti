@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const anubhav = "https://kissy-lion.static.domains/anubhav-home.png"
-const shubham = "https://kissy-lion.static.domains/shubham-home.png"
+const anubhav = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/anubhav-home.png?raw=true"
+const shubham = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/shubham-home.png?raw=true"
 const founders = [
   {
     name: "Shubham Kumar",

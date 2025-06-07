@@ -1,10 +1,10 @@
 import React from 'react';
 
-const NV = "https://kissy-lion.static.domains/clients/nv.png"
-const TLS = "https://kissy-lion.static.domains/clients/tls.png"
-const BB = "https://kissy-lion.static.domains/clients/bb.png"
-const Lotus = "https://kissy-lion.static.domains/clients/lotus.png"
-const HLP = "https://kissy-lion.static.domains/clients/hlp.png"
+const NV = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/clients/nv.png?raw=true"
+const TLS = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/clients/tls.png?raw=true"
+const BB = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/clients/bb.png?raw=true"
+const Lotus = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/clients/lotus.png?raw=true"
+const HLP = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/clients/hlp.png?raw=true"
 
 const ClientsSection: React.FC = () => {
   return (

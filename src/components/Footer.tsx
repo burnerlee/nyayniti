@@ -2,7 +2,7 @@ import React from 'react';
 import { Instagram, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const logo = "https://kissy-lion.static.domains/logo.png";
+const logo = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/logo.png?raw=true";
 const Footer: React.FC = () => {
   return (
     <footer className="bg-white text-black py-16">

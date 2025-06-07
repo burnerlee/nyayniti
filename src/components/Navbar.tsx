@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Scale } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const logo = "https://kissy-lion.static.domains/logo.png"
+const logo = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/logo.png?raw=true"
 const Navbar: React.FC = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);

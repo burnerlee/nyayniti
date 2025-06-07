@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const heroImage = "https://kissy-lion.static.domains/hero-home.png"
+const heroImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/hero-home.png?raw=true"
 const Hero: React.FC = () => {
   return (
     <section className="hero-section min-h-screen flex items-center pt-16 md:pt-20">

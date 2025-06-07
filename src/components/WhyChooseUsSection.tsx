@@ -1,6 +1,6 @@
 import React from 'react';
 
-const about4 = "https://kissy-lion.static.domains/about4.png"
+const about4 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about4.png?raw=true"
 const WhyChooseUsSection: React.FC = () => {
   return (
     <section className="py-20 bg-white">
