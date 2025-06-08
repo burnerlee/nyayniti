@@ -4,9 +4,11 @@ import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import YouTubeVideos from '../components/YouTubeVideos';
 import InstagramPosts from '../components/InstagramPosts';
+import ProgressiveBackground from '../components/ProgressiveBackground';
 
 // reference to the local image
 const blogImg = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/blog.webp?raw=true"
+const lowQualityImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/lowblog.webp?raw=true"
 
 const BlogPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'blogs' | 'videos'>('blogs');
@@ -100,18 +102,11 @@ const BlogPage: React.FC = () => {
       {/* Hero Section with Dark Overlay */}
       <div className="relative bg-black h-[550px]">
         {/* Background Image with Overlay */}
-        <div 
-          className="absolute inset-0 z-0 opacity-30" 
-          style={{ 
-            backgroundImage: `url(${blogImg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            objectFit: 'cover',
-            width: '100%',
-            height: '100%',
-            overflow: 'hidden'
-          }}
-        ></div>
+        <ProgressiveBackground
+          lowQualityImage={lowQualityImage}
+          highQualityImage={blogImg}
+          className="absolute inset-0 bg-black/60 z-0"
+        />
         
         {/* Hero Content */}
         <div className="container mx-auto px-6 md:px-16 pt-32 relative z-10">

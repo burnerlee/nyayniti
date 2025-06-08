@@ -1,22 +1,19 @@
 import React from 'react';
 import Navbar from './Navbar';
+import ProgressiveBackground from './ProgressiveBackground';
 
 const aboutUsIMG = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/aboutus.webp?raw=true"
+const lowQualityImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/lowaboutus.webp?raw=true"
 
 const AboutHero: React.FC = () => {
   return (
     <section className="relative h-screen">
       {/* Dark overlay for the background image */}
-      <div 
+      <ProgressiveBackground
+        lowQualityImage={lowQualityImage}
+        highQualityImage={aboutUsIMG}
         className="absolute inset-0 bg-black/60 z-0"
-        style={{
-          backgroundImage: `url(${aboutUsIMG})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundBlendMode: 'darken'
-        }}
-      ></div>
-      
+      />
       <Navbar />
       
       <div className="container mx-auto px-6 md:px-12 relative z-1 h-full flex flex-col justify-center">

@@ -1,20 +1,18 @@
 import React from 'react';
 import ContactForm from './ContactForm';
+import ProgressiveBackground from './ProgressiveBackground';
 
 const contactIMG = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/contact.webp?raw=true"
+const lowQualityImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/lowcontact.webp?raw=true"
 const ContactHero: React.FC = () => {
   return (
     <section className="relative bg-dark-gradient text-white py-20">
       {/* Dark overlay for the background image */}
-      <div 
+      <ProgressiveBackground
+        lowQualityImage={lowQualityImage}
+        highQualityImage={contactIMG}
         className="absolute inset-0 bg-black/60 z-0"
-        style={{
-          backgroundImage: `url(${contactIMG})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundBlendMode: 'darken'
-        }}
-      ></div>
+      />
       
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

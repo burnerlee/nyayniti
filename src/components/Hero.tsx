@@ -1,21 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ProgressiveBackground from './ProgressiveBackground';
 
 const heroImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/hero-home.webp?raw=true"
+const lowQualityImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/lowhero-home.webp?raw=true"
 const Hero: React.FC = () => {
   return (
     <section className="hero-section min-h-screen flex items-center pt-16 md:pt-20">
-      <div 
+      <ProgressiveBackground
+        lowQualityImage={lowQualityImage}
+        highQualityImage={heroImage}
         className="absolute inset-0 bg-black/60 z-0"
-        style={{
-          backgroundImage: `url(${heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundBlendMode: 'darken',
-          height: "100vh",
-          width: "100vw"
-        }}
-      ></div>
+      />
       <div className="container mx-auto px-6 md:px-12 py-24 z-10">
         <div className="max-w-4xl">
           <h1 className="text-4xl md:text-6xl font-playfair text-white leading-tight mb-6">
