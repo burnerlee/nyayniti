@@ -1,7 +1,7 @@
 import React from 'react';
 import { getImagePath } from '../utils/image';
 
-const about1 = getImagePath("about1.png")
+const about1 = getImagePath("about1.webp")
 const AboutFirmSection: React.FC = () => {
   return (
     <section className="py-20 bg-white">
