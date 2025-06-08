@@ -1,6 +1,7 @@
 import React from 'react';
+import { getImagePath } from '../utils/image';
 
-const about4 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about4.webp?raw=true"
+const about4 = "about4.webp"
 const WhyChooseUsSection: React.FC = () => {
   return (
     <section className="py-20 bg-white">
@@ -40,7 +41,7 @@ const WhyChooseUsSection: React.FC = () => {
           <div className="relative">
             <div className="border-4 border-gold/20 absolute -top-4 -left-4 right-4 bottom-4 z-0"></div>
             <img 
-              src={about4}
+              src={getImagePath(about4)}
               alt="Lawyers working together" 
               className="w-full h-auto relative z-1"
             />

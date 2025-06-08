@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import ProgressiveBackground from './ProgressiveBackground';
 
-const aboutUsIMG = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/aboutus.webp?raw=true"
+const aboutUsIMG = "aboutus.webp"
 const lowQualityImage = "lowaboutus.webp"
 
 const AboutHero: React.FC = () => {

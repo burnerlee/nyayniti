@@ -1,18 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getImagePath } from '../utils/image';
 
-const anubhav = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/anubhav-home.webp?raw=true"
-const shubham = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/shubham-home.webp?raw=true"
+const anubhav = "anubhav-home.webp"
+const shubham = "shubham-home.webp"
 const founders = [
   {
     name: "Shubham Kumar",
     role: "FOUNDER",
-    image: shubham
+    image: getImagePath(shubham)
   },
   {
     name: "Anubhav Jain",
     role: "CO-FOUNDER",
-    image: anubhav
+    image: getImagePath(anubhav)
   }
 ];
 

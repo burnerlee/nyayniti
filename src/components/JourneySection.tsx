@@ -1,7 +1,8 @@
 import React from 'react';
+import { getImagePath } from '../utils/image';
 
-const about2 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about2.webp?raw=true"
-const about3 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about3.webp?raw=true"
+const about2 = "about2.webp"
+const about3 = "about3.webp"
 const JourneySection: React.FC = () => {
   return (
     <section className="py-20 bg-gray-50">
@@ -12,7 +13,7 @@ const JourneySection: React.FC = () => {
               <div className="relative">
                 <div className="border-4 border-gold/20 absolute -top-4 -left-4 right-4 bottom-4 z-0"></div>
                 <img 
-                  src={about2}
+                  src={getImagePath(about2)}
                   alt="Founders working together" 
                   className="w-full h-auto relative z-1"
                 />
@@ -21,7 +22,7 @@ const JourneySection: React.FC = () => {
               <div className="relative">
                 <div className="border-4 border-gold/20 absolute -top-4 -left-4 right-4 bottom-4 z-0"></div>
                 <img 
-                  src={about3}
+                  src={getImagePath(about3)}
                   alt="Lawyer working" 
                   className="w-full h-auto relative z-1"
                 />

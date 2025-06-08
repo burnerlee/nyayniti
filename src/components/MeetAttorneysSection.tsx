@@ -1,10 +1,10 @@
 import React from 'react';
-
-const shubham = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/shubham.webp?raw=true"
-const anubhav = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/anubhav.webp?raw=true"
-const udit = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/udit.webp?raw=true"
-const rimmi = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/rimmi.webp?raw=true"
-const dev = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/dev.webp?raw=true"
+import { getImagePath } from '../utils/image';
+const shubham = "attorneys/shubham.webp"
+const anubhav = "attorneys/anubhav.webp"
+const udit = "attorneys/udit.webp"
+const rimmi = "attorneys/rimmi.webp"
+const dev = "attorneys/dev.webp"
 
 interface AttorneyProps {
   name: string;
@@ -16,27 +16,27 @@ const attorneys: AttorneyProps[] = [
   {
     name: "Adv. Shubham Kumar",
     title: "FOUNDER",
-    image: shubham
+    image: getImagePath(shubham)
   },
   {
     name: "Adv. Anubhav Jain",
     title: "CO-FOUNDER",
-    image: anubhav
+    image: getImagePath(anubhav)
   },
   {
     name: "Adv. Udit wadhwa",
     title: "ASSOCIATE",
-    image: udit
+    image: getImagePath(udit)
   },
   {
     name: "Ms. Rimmi Panjrath",
     title: "PARALEGAL",
-    image: rimmi
+    image: getImagePath(rimmi)
   },
   {
     name: "Mr. Dev Malik",
     title: "ASSOCIATE",
-    image: dev
+    image: getImagePath(dev)
   }
 ];
 

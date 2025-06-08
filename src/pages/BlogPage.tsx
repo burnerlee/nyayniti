@@ -7,7 +7,7 @@ import InstagramPosts from '../components/InstagramPosts';
 import ProgressiveBackground from '../components/ProgressiveBackground';
 
 // reference to the local image
-const blogImg = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/blog.webp?raw=true"
+const blogImg = "blog.webp"
 const lowQualityImage = "lowblog.webp"
 
 const BlogPage: React.FC = () => {

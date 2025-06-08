@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ProgressiveBackground from './ProgressiveBackground';
 
-const heroImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/hero-home.webp?raw=true"
+const heroImage = "hero-home.webp"
 const lowQualityImage = "lowhero-home.webp"
 const Hero: React.FC = () => {
   return (

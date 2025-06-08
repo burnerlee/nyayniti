@@ -2,7 +2,7 @@ import React from 'react';
 import ContactForm from './ContactForm';
 import ProgressiveBackground from './ProgressiveBackground';
 
-const contactIMG = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/contact.webp?raw=true"
+const contactIMG = "contact.webp"
 const lowQualityImage = "lowcontact.webp"
 const ContactHero: React.FC = () => {
   return (

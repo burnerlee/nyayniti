@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getImagePath } from '../utils/image';
 
 interface ProgressiveBackgroundProps {
   lowQualityImage: string;
@@ -21,7 +22,7 @@ const ProgressiveBackground: React.FC<ProgressiveBackgroundProps> = ({
     
     // Preload the high-resolution image
     const img = new Image();
-    img.src = highQualityImage;
+    img.src = getImagePath(highQualityImage);
     
     img.onload = () => {
       setImageLoaded(true);
@@ -35,23 +36,6 @@ const ProgressiveBackground: React.FC<ProgressiveBackgroundProps> = ({
 
   // Calculate the black overlay based on provided opacity
   const overlayClass = `bg-black/${overlayOpacity}`;
-
-  // Function to handle image path
-  const getImagePath = (imagePath: string) => {
-    // If it's a URL (starts with http or https), use it directly
-    if (imagePath.startsWith('http')) {
-      return imagePath;
-    }
-    // For local images, import from assets
-    try {
-      // Using dynamic import for local images
-      const image = new URL(`../assets/${imagePath}`, import.meta.url).href;
-      return image;
-    } catch (error) {
-      console.error('Error loading image:', error);
-      return '';
-    }
-  };
 
   return (
       <div 

@@ -1,6 +1,7 @@
 import React from 'react';
+import { getImagePath } from '../utils/image';
 
-const about1 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about1.webp?raw=true"
+const about1 = getImagePath("about1.png")
 const AboutFirmSection: React.FC = () => {
   return (
     <section className="py-20 bg-white">

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Scale } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getImagePath } from '../utils/image';
 
-const logo = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/logo.png?raw=true"
+const logo = "logo.png"
 const Navbar: React.FC = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -34,7 +35,7 @@ const Navbar: React.FC = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 px-4 py-4 md:px-12 transition-all duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'} ${atTop ? 'bg-transparent' : 'bg-black bg-opacity-90 shadow-lg'}`}>
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-8 md:h-10 mr-2" />
+          <img src={getImagePath(logo)} alt="Logo" className="h-8 md:h-10 mr-2" />
           <Link to="/" className="text-white text-xl font-librebaskerville">NyayNiti</Link>
         </div>
         

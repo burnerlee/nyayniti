@@ -1,10 +1,11 @@
 import React from 'react';
+import { getImagePath } from '../utils/image';
 
-const NV = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/clients/nv.png?raw=true"
-const TLS = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/clients/tls.png?raw=true"
-const BB = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/clients/bb.png?raw=true"
-const Lotus = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/clients/lotus.png?raw=true"
-const HLP = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/clients/hlp.png?raw=true"
+const NV = "clients/nv.png"
+const TLS = "clients/tls.png"
+const BB = "clients/bb.png"
+const Lotus = "clients/lotus.png"
+const HLP = "clients/hlp.png"
 
 const ClientsSection: React.FC = () => {
   return (
@@ -17,19 +18,19 @@ const ClientsSection: React.FC = () => {
           <h2 className="text-2xl font-playfair">Our Clients</h2>
         </div>
           <div className="flex items-center justify-center">
-            <img src={NV} alt="Client 1" className="h-14" />
+            <img src={getImagePath(NV)} alt="Client 1" className="h-14" />
           </div>
           <div className="flex items-center justify-center">
-            <img src={TLS} alt="Client 2" className="h-14" />
+            <img src={getImagePath(TLS)} alt="Client 2" className="h-14" />
           </div>
           <div className="flex items-center justify-center">
-            <img src={Lotus} alt="Client 3" className="h-14" />
+            <img src={getImagePath(Lotus)} alt="Client 3" className="h-14" />
           </div>
           <div className="flex items-center justify-center">
-            <img src={HLP} alt="Client 4" className="h-14" />
+            <img src={getImagePath(HLP)} alt="Client 4" className="h-14" />
           </div>
           <div className="flex items-center justify-center">
-            <img src={BB} alt="Client 5" className="h-14" />
+            <img src={getImagePath(BB)} alt="Client 5" className="h-14" />
           </div>
         </div>
       </div>

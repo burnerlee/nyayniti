@@ -1,16 +1,17 @@
 import React from 'react';
+import { getImagePath } from '../utils/image';
 
-const anubhav = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/anubhav-about.webp?raw=true";
-const shubham = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/shubham-about.webp?raw=true";
+const anubhav = "anubhav-about.webp";
+const shubham = "shubham-about.webp";
 const founders = [
   {
     name: "Adv. Shubham Kumar",
-    image: shubham,
+    image: getImagePath(shubham),
     bio: "Adv. Shubham Kumar is a Delhi-based lawyer and member of the Supreme Court Bar Association with extensive experience in corporate and litigation practice. After beginning at a corporate law firm, he transitioned to litigation and worked with an Advocate-on-Record at the Supreme Court before founding NyayNiti in 2023. His firm has collaborated with Senior Advocates, represented the Anglo-Indian community in the Delhi High Court, and secured a landmark judgment under Section 498A IPC."
   },
   {
     name: "Adv. Anubhav Jain",
-    image: anubhav,
+    image: getImagePath(anubhav),
     bio: "Adv. Anubhav Jain, co-founder of NyayNiti, specializes in Criminal and Constitutional Law and has represented clients in high-profile criminal and white-collar cases across High Courts and the Supreme Court of India. Driven by a passion for justice and social impact, he actively contributes to legal forums, supports NGOs, and promotes legal awareness among children and women through educational and empowerment initiatives."
   }
 ];

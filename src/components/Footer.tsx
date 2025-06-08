@@ -1,8 +1,9 @@
 import React from 'react';
 import { Instagram, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getImagePath } from '../utils/image';
 
-const logo = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/logo.png?raw=true";
+const logo = "logo.png";
 const Footer: React.FC = () => {
   return (
     <footer className="bg-white text-black py-16">
@@ -11,7 +12,7 @@ const Footer: React.FC = () => {
           {/* Logo and Tagline */}
           <div>
             <div className="flex items-center mb-6">
-              <img src={logo} alt="Logo" className="w-12 h-12 mr-4" />
+              <img src={getImagePath(logo)} alt="Logo" className="w-12 h-12 mr-4" />
               <span className="text-black text-2xl font-playfair">NyayNiti</span>
             </div>
             <p className="text-gray-600 leading-relaxed">
