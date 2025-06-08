@@ -8,7 +8,7 @@ import ProgressiveBackground from '../components/ProgressiveBackground';
 
 // reference to the local image
 const blogImg = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/blog.webp?raw=true"
-const lowQualityImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/lowblog.webp?raw=true"
+const lowQualityImage = "lowblog.webp"
 
 const BlogPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'blogs' | 'videos'>('blogs');

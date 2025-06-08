@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ProgressiveBackground from './ProgressiveBackground';
 
 const heroImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/hero-home.webp?raw=true"
-const lowQualityImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/lowhero-home.webp?raw=true"
+const lowQualityImage = "lowhero-home.webp"
 const Hero: React.FC = () => {
   return (
     <section className="hero-section min-h-screen flex items-center pt-16 md:pt-20">

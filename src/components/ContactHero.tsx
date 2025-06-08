@@ -3,7 +3,7 @@ import ContactForm from './ContactForm';
 import ProgressiveBackground from './ProgressiveBackground';
 
 const contactIMG = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/contact.webp?raw=true"
-const lowQualityImage = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/lowcontact.webp?raw=true"
+const lowQualityImage = "lowcontact.webp"
 const ContactHero: React.FC = () => {
   return (
     <section className="relative bg-dark-gradient text-white py-20">
