@@ -5,7 +5,6 @@ interface ProgressiveBackgroundProps {
   highQualityImage: string;
   className?: string;
   overlayOpacity?: number; // Optional prop for customizing the dark overlay
-  children?: React.ReactNode;
 }
 
 const ProgressiveBackground: React.FC<ProgressiveBackgroundProps> = ({
@@ -13,7 +12,6 @@ const ProgressiveBackground: React.FC<ProgressiveBackgroundProps> = ({
   highQualityImage,
   className = "",
   overlayOpacity = 60, // Default to 60% black overlay
-  children
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   
@@ -39,9 +37,8 @@ const ProgressiveBackground: React.FC<ProgressiveBackgroundProps> = ({
   const overlayClass = `bg-black/${overlayOpacity}`;
 
   return (
-    <div className={`relative ${className}`}>
       <div 
-        className={`absolute inset-0 ${overlayClass} z-0 transition-all duration-700`}
+        className={`${overlayClass} ${className} transition-all duration-700`}
         style={{
           backgroundImage: `url(${imageLoaded ? highQualityImage : lowQualityImage})`,
           backgroundSize: 'cover',
@@ -49,10 +46,7 @@ const ProgressiveBackground: React.FC<ProgressiveBackgroundProps> = ({
           backgroundBlendMode: 'darken',
           filter: !imageLoaded ? 'blur(8px)' : 'none',
         }}
-        aria-hidden="true"
       />
-      {children}
-    </div>
   );
 };
 

@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
       <ProgressiveBackground
         lowQualityImage={lowQualityImage}
         highQualityImage={heroImage}
-        className="absolute inset-0 bg-black/60 z-0"
+        className="absolute inset-0 bg-black/60 z-0 h-screen w-screen"
       />
       <div className="container mx-auto px-6 md:px-12 py-24 z-10">
         <div className="max-w-4xl">
