@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import YouTubeVideos from '../components/YouTubeVideos';
 import InstagramPosts from '../components/InstagramPosts';
 
-const blogImg = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/blog.png?raw=true"
+// reference to the local image
+const blogImg = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/blog.webp?raw=true"
 
 const BlogPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'blogs' | 'videos'>('blogs');

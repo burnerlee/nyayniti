@@ -1,6 +1,6 @@
 import React from 'react';
 
-const about1 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about1.png?raw=true"
+const about1 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about1.webp?raw=true"
 const AboutFirmSection: React.FC = () => {
   return (
     <section className="py-20 bg-white">

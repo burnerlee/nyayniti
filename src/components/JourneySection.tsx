@@ -1,7 +1,7 @@
 import React from 'react';
 
-const about2 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about2.png?raw=true"
-const about3 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about3.png?raw=true"
+const about2 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about2.webp?raw=true"
+const about3 = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/about3.webp?raw=true"
 const JourneySection: React.FC = () => {
   return (
     <section className="py-20 bg-gray-50">

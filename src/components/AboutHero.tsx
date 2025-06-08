@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 
-const aboutUsIMG = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/aboutus.png?raw=true"
+const aboutUsIMG = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/aboutus.webp?raw=true"
 
 const AboutHero: React.FC = () => {
   return (

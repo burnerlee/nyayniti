@@ -1,10 +1,10 @@
 import React from 'react';
 
-const shubham = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/shubham.png?raw=true"
-const anubhav = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/anubhav.png?raw=true"
-const udit = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/udit.png?raw=true"
-const rimmi = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/rimmi.png?raw=true"
-const dev = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/dev.png?raw=true"
+const shubham = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/shubham.webp?raw=true"
+const anubhav = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/anubhav.webp?raw=true"
+const udit = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/udit.webp?raw=true"
+const rimmi = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/rimmi.webp?raw=true"
+const dev = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/attorneys/dev.webp?raw=true"
 
 interface AttorneyProps {
   name: string;

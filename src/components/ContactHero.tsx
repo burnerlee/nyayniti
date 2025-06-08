@@ -1,7 +1,7 @@
 import React from 'react';
 import ContactForm from './ContactForm';
 
-const contactIMG = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/contact.png?raw=true"
+const contactIMG = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/contact.webp?raw=true"
 const ContactHero: React.FC = () => {
   return (
     <section className="relative bg-dark-gradient text-white py-20">

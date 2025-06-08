@@ -1,7 +1,7 @@
 import React from 'react';
 
-const anubhav = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/anubhav-about.png?raw=true";
-const shubham = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/shubham-about.png?raw=true";
+const anubhav = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/anubhav-about.webp?raw=true";
+const shubham = "https://github.com/burnerlee/nyayniti/blob/main/src/assets/shubham-about.webp?raw=true";
 const founders = [
   {
     name: "Adv. Shubham Kumar",
