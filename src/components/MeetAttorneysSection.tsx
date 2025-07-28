@@ -5,6 +5,7 @@ const anubhav = "attorneys/anubhav.webp"
 const udit = "attorneys/udit.webp"
 const rimmi = "attorneys/rimmi.webp"
 const dev = "attorneys/dev.webp"
+const newAssociate = "attorneys/new-associate.webp";
 
 interface AttorneyProps {
   name: string;
@@ -37,6 +38,11 @@ const attorneys: AttorneyProps[] = [
     name: "Mr. Dev Malik",
     title: "ASSOCIATE",
     image: getImagePath(dev)
+  },
+  {
+    name: "Mr. Rishabh Rajpoot",
+    title: "ASSOCIATE",
+    image: getImagePath(newAssociate)
   }
 ];
 
