@@ -77,9 +77,11 @@ const MeetAttorneysSection: React.FC = () => {
           ))}
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto justify-center">
+        <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
           {attorneys.slice(2).map((attorney, index) => (
-            <AttorneyCard key={index} {...attorney} />
+            <div key={index} className="w-full md:w-[calc(33.333%-1rem)]">
+              <AttorneyCard {...attorney} />
+            </div>
           ))}
         </div>
         
