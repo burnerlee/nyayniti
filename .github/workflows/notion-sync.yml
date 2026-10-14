@@ -1,0 +1,41 @@
+name: Sync Notion content
+
+# Pulls blogs + attorneys from Notion; a commit to main triggers the Netlify deploy.
+on:
+  schedule:
+    - cron: '0 * * * *' # hourly
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: notion-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch from Notion
+        run: node scripts/fetch-notion.mjs
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_BLOG_PARENT_ID: ${{ secrets.NOTION_BLOG_PARENT_ID }}
+      - name: Commit changes
+        run: |
+          git add src/generated public/blog-images public/attorney-images
+          if git diff --cached --quiet; then
+            echo "No Notion changes"
+            exit 0
+          fi
+          git config user.name "notion-sync"
+          git config user.email "notion-sync@users.noreply.github.com"
+          git commit -m "Sync content from Notion"
+          git push origin main
