@@ -2,6 +2,7 @@ import data from '../generated/blogs.json';
 
 export interface BlogPost {
   slug: string;
+  aliases?: string[];
   title: string;
   excerpt: string;
   date: string;
