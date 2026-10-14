@@ -6,6 +6,7 @@ import YouTubeVideos from '../components/YouTubeVideos';
 import InstagramPosts from '../components/InstagramPosts';
 import ProgressiveBackground from '../components/ProgressiveBackground';
 import { AUTHOR_PHOTO, blogPosts, formatDate } from '../utils/blogs';
+import ShareMenu from '../components/ShareMenu';
 import { useSeo } from '../utils/useSeo';
 import pages from '../utils/pages.json';
 
@@ -92,9 +93,12 @@ const BlogPage: React.FC = () => {
                           <img src={AUTHOR_PHOTO} alt={post.author} className="w-8 h-8 rounded-full object-cover object-top mr-2" />
                           <span className="text-sm text-gray-700">{post.author}</span>
                         </div>
-                        <Link to={`/blog/${post.slug}`} className="inline-flex items-center text-gold hover:text-darkGold transition-colors">
-                          Read more <ChevronRight size={16} className="ml-1" />
-                        </Link>
+                        <div className="flex items-center gap-3">
+                          <Link to={`/blog/${post.slug}`} className="inline-flex items-center text-gold hover:text-darkGold transition-colors">
+                            Read more <ChevronRight size={16} className="ml-1" />
+                          </Link>
+                          <ShareMenu url={`https://nyayniti.in/blog/${post.slug}`} title={post.title} />
+                        </div>
                       </div>
                     </div>
                   </article>
