@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import ShareButtons from '../components/ShareButtons';
+import ShareMenu from '../components/ShareMenu';
 import { ArrowLeft, ChevronRight } from 'lucide-react';
 import { AUTHOR_PHOTO, blogPosts, formatDate, getPost } from '../utils/blogs';
 import { useSeo } from '../utils/useSeo';
@@ -97,9 +98,12 @@ const BlogPostPage: React.FC = () => {
                   <Link to={`/blog/${p.slug}`} className="hover:text-gold transition-colors">{p.title}</Link>
                 </h3>
                 <p className="text-gray-600 mb-3 text-sm">{p.excerpt}</p>
-                <Link to={`/blog/${p.slug}`} className="inline-flex items-center text-gray-700 hover:text-gold transition-colors text-sm">
-                  Read more <ChevronRight size={16} className="ml-1" />
-                </Link>
+                <div className="flex items-center justify-between">
+                  <Link to={`/blog/${p.slug}`} className="inline-flex items-center text-gray-700 hover:text-gold transition-colors text-sm">
+                    Read more <ChevronRight size={16} className="ml-1" />
+                  </Link>
+                  <ShareMenu url={`https://nyayniti.in/blog/${p.slug}`} title={p.title} />
+                </div>
               </div>
             ))}
           </div>
