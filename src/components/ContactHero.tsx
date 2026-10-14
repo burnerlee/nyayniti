@@ -18,10 +18,10 @@ const ContactHero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="flex flex-col justify-center">
             <p className="text-gold text-xl mb-4">Have any questions ?</p>
-            <h2 className="text-4xl md:text-5xl font-playfair text-white mb-8">
+            <h1 className="text-4xl md:text-5xl font-playfair text-white mb-8">
               Book a free<br />
               consultation with us!
-            </h2>
+            </h1>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <a 

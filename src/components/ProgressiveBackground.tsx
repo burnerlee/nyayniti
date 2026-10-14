@@ -5,49 +5,51 @@ interface ProgressiveBackgroundProps {
   lowQualityImage: string;
   highQualityImage: string;
   className?: string;
-  overlayOpacity?: number; // Optional prop for customizing the dark overlay
 }
 
+// The low-quality image is a tiny (~32px) placeholder that Vite inlines as a data URI, so it paints
+// immediately; the full image fades in over it once decoded.
 const ProgressiveBackground: React.FC<ProgressiveBackgroundProps> = ({
   lowQualityImage,
   highQualityImage,
   className = "",
-  overlayOpacity = 60, // Default to 60% black overlay
 }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  
+  const [loaded, setLoaded] = useState(false);
+  const high = getImagePath(highQualityImage);
+
   useEffect(() => {
-    // Reset state when image sources change
-    setImageLoaded(false);
-    
-    // Preload the high-resolution image
+    setLoaded(false);
     const img = new Image();
-    img.src = getImagePath(highQualityImage);
-    
-    img.onload = () => {
-      setImageLoaded(true);
-    };
-    
+    img.onload = () => setLoaded(true);
+    img.src = high;
+    // Cached images can finish before onload is attached.
+    if (img.complete) setLoaded(true);
     return () => {
-      // Clean up by removing the onload handler if component unmounts
       img.onload = null;
     };
-  }, [highQualityImage]);
+  }, [high]);
 
-  // Calculate the black overlay based on provided opacity
-  const overlayClass = `bg-black/${overlayOpacity}`;
+  const layer = (url: string): React.CSSProperties => ({
+    backgroundImage: `url(${url})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  });
 
   return (
-      <div 
-        className={`${overlayClass} ${className} transition-all duration-700`}
-        style={{
-          backgroundImage: `url(${imageLoaded ? getImagePath(highQualityImage) : getImagePath(lowQualityImage)})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundBlendMode: 'darken',
-          filter: !imageLoaded ? 'blur(8px)' : 'none',
-        }}
+    <div className={`${className} overflow-hidden`}>
+      <div
+        className="absolute inset-0 scale-110 blur-xl"
+        style={layer(getImagePath(lowQualityImage))}
+        aria-hidden="true"
       />
+      <div
+        className={`absolute inset-0 transition-opacity duration-700 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        style={layer(high)}
+        aria-hidden="true"
+      />
+      {/* Dark overlay must sit above both image layers. */}
+      <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+    </div>
   );
 };
 

@@ -7,6 +7,7 @@ import InstagramPosts from '../components/InstagramPosts';
 import ProgressiveBackground from '../components/ProgressiveBackground';
 import { AUTHOR_PHOTO, blogPosts, formatDate } from '../utils/blogs';
 import { useSeo } from '../utils/useSeo';
+import pages from '../utils/pages.json';
 
 // reference to the local image
 const blogImg = "blog.webp"
@@ -14,7 +15,7 @@ const lowQualityImage = "lowblog.webp"
 
 const BlogPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'blogs' | 'videos'>('blogs');
-  useSeo('Legal Blog | NyayNiti', 'Insights on Indian law, matrimonial disputes, bail, and litigation from the advocates at NyayNiti.');
+  useSeo(pages['/blog'].title, pages['/blog'].description);
   
   return (
     <div className="min-h-screen bg-white">

@@ -9,8 +9,11 @@ import TestimonialsSection from '../components/TestimonialsSection';
 import MediaSection from '../components/MediaSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
+import pages from '../utils/pages.json';
+import { useSeo } from '../utils/useSeo';
 
 const HomePage: React.FC = () => {
+  useSeo(pages['/'].title, pages['/'].description);
   return (
     <div className="min-h-screen">
       <Hero />
