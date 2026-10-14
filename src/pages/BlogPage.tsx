@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import YouTubeVideos from '../components/YouTubeVideos';
 import InstagramPosts from '../components/InstagramPosts';
 import ProgressiveBackground from '../components/ProgressiveBackground';
+import { AUTHOR_PHOTO, blogPosts, formatDate } from '../utils/blogs';
+import { useSeo } from '../utils/useSeo';
 
 // reference to the local image
 const blogImg = "blog.webp"
@@ -12,91 +14,8 @@ const lowQualityImage = "lowblog.webp"
 
 const BlogPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'blogs' | 'videos'>('blogs');
+  useSeo('Legal Blog | NyayNiti', 'Insights on Indian law, matrimonial disputes, bail, and litigation from the advocates at NyayNiti.');
   
-  // Sample blog posts data
-  const blogPosts = [
-    {
-      id: 1,
-      title: "How does writing influence your personal brand?",
-      category: "Personal Injury",
-      readTime: "5 min read",
-      image: "https://images.pexels.com/photos/3985368/pexels-photo-3985368.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    },
-    {
-      id: 2,
-      title: "How to get bail for the offense under section 498A of IPC",
-      category: "Personal Injury",
-      readTime: "5 min read",
-      image: "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    },
-    {
-      id: 3,
-      title: "How to get bail for the offense under section 498A of IPC",
-      category: "Personal Injury",
-      readTime: "5 min read",
-      image: "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    }
-  ];
-
-  // Sample podcast videos data
-  const podcastVideos = [
-    {
-      id: 1,
-      title: "How to get bail for the offense under section 498A of IPC",
-      thumbnail: "https://images.pexels.com/photos/8942991/pexels-photo-8942991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      youtubeId: "dQw4w9WgXcQ"
-    },
-    {
-      id: 2,
-      title: "How to get bail for the offense under section 498A of IPC",
-      thumbnail: "https://images.pexels.com/photos/8942991/pexels-photo-8942991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      youtubeId: "dQw4w9WgXcQ"
-    },
-    {
-      id: 3,
-      title: "How to get bail for the offense under section 498A of IPC",
-      thumbnail: "https://images.pexels.com/photos/8942991/pexels-photo-8942991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      youtubeId: "dQw4w9WgXcQ"
-    }
-  ];
-
-  // Sample social media posts
-  const socialPosts = [
-    {
-      id: 1,
-      username: "behold.social",
-      followers: "94 followers",
-      image: "https://images.pexels.com/photos/2363/france-landmark-lights-night.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      likes: 0,
-      caption: "The public demanded peremptorily that the seas should at any price be relieved from this formidable cetacean.",
-      photoCredit: "Photo credit: Martin Widenka",
-      link: "https://behold.so",
-      hashtags: "#aass #indiepreneur #indehacker #ui #uiux #nocode #webaccessibility #a11y #uiserveme"
-    },
-    {
-      id: 2,
-      username: "behold.social",
-      followers: "94 followers",
-      image: "https://images.pexels.com/photos/2363/france-landmark-lights-night.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      likes: 0,
-      caption: "The public demanded peremptorily that the seas should at any price be relieved from this formidable cetacean.",
-      photoCredit: "Photo credit: Martin Widenka",
-      link: "https://behold.so",
-      hashtags: "#aass #indiepreneur #indehacker #ui #uiux #nocode #webaccessibility #a11y #uiserveme"
-    },
-    {
-      id: 3,
-      username: "behold.social",
-      followers: "94 followers",
-      image: "https://images.pexels.com/photos/2363/france-landmark-lights-night.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      likes: 0,
-      caption: "The public demanded peremptorily that the seas should at any price be relieved from this formidable cetacean.",
-      photoCredit: "Photo credit: Martin Widenka",
-      link: "https://behold.so",
-      hashtags: "#aass #indiepreneur #indehacker #ui #uiux #nocode #webaccessibility #a11y #uiserveme"
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section with Dark Overlay */}
@@ -136,47 +55,51 @@ const BlogPage: React.FC = () => {
       </div>
       
       {/* Content Section */}
-      <div className="container mx-auto px-6 md:px-16 py-24">
+      <div className="container mx-auto max-w-7xl px-6 md:px-12 py-24">
         {activeTab === 'blogs' ? (
           <>
-            <h2 className="text-2xl font-bold mb-12">Featured blog posts</h2>
-            
-            {/* Coming Soon Message */}
-            <div className="flex flex-col items-center justify-center py-20">
-              <h3 className="text-3xl font-playfair text-gray-800 mb-4">Coming Soon</h3>
-              <p className="text-lg text-gray-600 text-center max-w-2xl">
-                We're currently working on creating insightful legal content for you. 
-                Our blog section will be available shortly with expert legal advice, case studies, 
-                and the latest updates in Indian law.
-              </p>
-              <div className="mt-8 w-24 h-1 bg-gold"></div>
-            </div>
+            <h2 className="text-3xl font-playfair font-bold mb-12 text-center">Featured blog posts</h2>
 
-            {/* Original Blog Posts - Commented Out
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {blogPosts.map(post => (
-                <div key={post.id} className="bg-white overflow-hidden">
-                  <img 
-                    src={post.image} 
-                    alt={post.title} 
-                    className="w-full h-60 object-cover"
-                  />
-                  <div className="pt-4">
-                    <div className="flex justify-between items-center text-sm text-gray-600 mb-3">
-                      <span>{post.category}</span>
-                      <span className="flex items-center">
-                        {post.readTime}
-                      </span>
+            {blogPosts.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-20">
+                <h3 className="text-3xl font-playfair text-gray-800 mb-4">Coming Soon</h3>
+                <p className="text-lg text-gray-600 text-center max-w-2xl">
+                  We're currently working on creating insightful legal content for you.
+                </p>
+                <div className="mt-8 w-24 h-1 bg-gold"></div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                {blogPosts.map(post => (
+                  <article key={post.slug} className="bg-white border border-gray-200 hover:shadow-lg transition-shadow flex flex-col">
+                    {post.cover && (
+                      <Link to={`/blog/${post.slug}`}>
+                        <img src={post.cover} alt={post.title} className="w-full h-56 object-cover" loading="lazy" />
+                      </Link>
+                    )}
+                    <div className="p-6 flex flex-col flex-1">
+                      <div className="flex justify-between items-center text-sm text-gray-500 mb-3">
+                        <span>{post.tags[0] ?? formatDate(post.date)}</span>
+                        <span>{post.readTime}</span>
+                      </div>
+                      <h3 className="text-xl font-playfair font-bold mb-3 leading-snug">
+                        <Link to={`/blog/${post.slug}`} className="hover:text-gold transition-colors">{post.title}</Link>
+                      </h3>
+                      <p className="text-gray-600 text-sm mb-6 line-clamp-3">{post.excerpt}</p>
+                      <div className="mt-auto flex items-center justify-between">
+                        <div className="flex items-center">
+                          <img src={AUTHOR_PHOTO} alt={post.author} className="w-8 h-8 rounded-full object-cover object-top mr-2" />
+                          <span className="text-sm text-gray-700">{post.author}</span>
+                        </div>
+                        <Link to={`/blog/${post.slug}`} className="inline-flex items-center text-gold hover:text-darkGold transition-colors">
+                          Read more <ChevronRight size={16} className="ml-1" />
+                        </Link>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-4">{post.title}</h3>
-                    <Link to={`/blog/${post.id}`} className="inline-flex items-center text-gold hover:text-darkGold transition-colors">
-                      Read more <ChevronRight size={16} className="ml-1" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-            */}
+                  </article>
+                ))}
+              </div>
+            )}
           </>
         ) : (
           <>
