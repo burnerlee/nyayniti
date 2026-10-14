@@ -179,6 +179,12 @@ for (const p of posts) {
   );
 }
 
+// Old slugs -> current slug (301), so previously shared or indexed links keep working
+write(
+  '_redirects',
+  posts.flatMap((p) => (p.aliases ?? []).map((a) => `/blog/${a} /blog/${p.slug} 301`)).join('\n') + '\n'
+);
+
 // 404 page: noindex, client router renders the not-found state
 write(
   '404.html',

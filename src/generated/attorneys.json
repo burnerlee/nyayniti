@@ -12,24 +12,29 @@
       "image": "/attorney-images/b2851e377230.webp"
     },
     {
-      "name": "Adv. Udit wadhwa",
-      "title": "ASSOCIATE",
-      "image": "/attorney-images/d84af509f04b.webp"
-    },
-    {
-      "name": "Ms. Rimmi Panjrath",
-      "title": "ASSOCIATE",
-      "image": "/attorney-images/6132f7f56bbf.webp"
-    },
-    {
-      "name": "Mr. Dev Malik",
+      "name": "Adv. Dev Malik",
       "title": "ASSOCIATE",
       "image": "/attorney-images/5af4ea191dd3.webp"
     },
     {
-      "name": "Mr. Rishabh Rajpoot",
+      "name": "Adv. Rishabh Rajpoot",
       "title": "ASSOCIATE",
       "image": "/attorney-images/7f498fba0adf.webp"
+    },
+    {
+      "name": "Adv. Rimmi Panjrath",
+      "title": "ASSOCIATE",
+      "image": "/attorney-images/6132f7f56bbf.webp"
+    },
+    {
+      "name": "Adv. Amanpreet Singh",
+      "title": "ASSOCIATE",
+      "image": "/attorney-images/6a0634ee2649.webp"
+    },
+    {
+      "name": "Adv. Udit wadhwa",
+      "title": "ASSOCIATE",
+      "image": "/attorney-images/d84af509f04b.webp"
     }
   ]
 }

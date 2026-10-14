@@ -69,12 +69,21 @@ const slugify = (s) =>
 const unesc = (s) =>
   s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&amp;/g, '&');
 
-// Cap at ~60 chars on a word boundary so URLs stay readable.
+const STOP_WORDS = new Set(
+  'a an the of to in on for and or but is are was be can could will would do does you your it its that this with by at from as how what why when who which if'.split(' ')
+);
+// Words that read as unfinished when a slug ends on them ("...-judgment-still").
+const DANGLING = new Set(['still', 'not', 'before', 'after', 'whether', 'during', 'without', 'because', 'between', 'under']);
+
+// Short, readable URL from the headline: the topic before ':' or '?', stop words dropped, <= 6 words.
 const shortSlug = (title) => {
-  const full = slugify(title);
-  if (full.length <= 60) return full;
-  const cut = full.slice(0, 60);
-  return cut.slice(0, cut.lastIndexOf('-')) || cut;
+  const head = title.split(/[:?]/)[0];
+  const base = head.trim().split(/\s+/).length >= 3 ? head : title;
+  const words = slugify(base.replace(/[–—]/g, ' ')).split('-').filter(Boolean);
+  const keep = words.filter((w) => !STOP_WORDS.has(w));
+  const pick = (keep.length >= 3 ? keep : words).slice(0, 6);
+  while (pick.length > 2 && DANGLING.has(pick[pick.length - 1])) pick.pop();
+  return pick.join('-');
 };
 
 const plain = (rt = []) => rt.map((t) => t.plain_text).join('');
@@ -280,6 +289,15 @@ async function main() {
   if (attorneysPage) await fetchAttorneys(attorneysPage, titleOf(attorneysPage));
   else console.warn('[notion] "Meet Our Attorneys" page not found, keeping existing attorneys.json');
 
+  let previous = new Map();
+  try {
+    const old = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8')).posts;
+    // Key by page id; fall back to slug for entries written before ids were stored.
+    previous = new Map(old.flatMap((p) => [[p.id ?? `slug:${p.slug}`, p]]));
+  } catch {
+    // no previous file
+  }
+
   const posts = [];
   for (const page of pages) {
     const titleProp = Object.values(page.properties).find((p) => p.type === 'title');
@@ -303,8 +321,14 @@ async function main() {
     const excerptProp = plain(prop(page, 'Excerpt', 'rich_text')?.rich_text).trim();
     const dateProp = prop(page, 'Date', 'date')?.date?.start;
 
+    // Slugs this page had in the last committed blogs.json stay as redirects (shared links keep working).
+    const prev = previous.get(page.id) ?? previous.get(`slug:${slug}`);
+    const aliases = [...new Set([...(prev?.aliases ?? []), ...(prev && prev.slug !== slug ? [prev.slug] : [])])].filter((a) => a !== slug);
+
     posts.push({
+      id: page.id,
       slug,
+      aliases,
       title,
       excerpt: excerptProp || html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 157) + '...',
       date: dateProp || page.created_time.slice(0, 10),

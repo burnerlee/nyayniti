@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
+import ShareButtons from '../components/ShareButtons';
 import { ArrowLeft, ChevronRight } from 'lucide-react';
 import { AUTHOR_PHOTO, blogPosts, formatDate, getPost } from '../utils/blogs';
 import { useSeo } from '../utils/useSeo';
@@ -59,6 +60,10 @@ const BlogPostPage: React.FC = () => {
         )}
 
         <div className="blog-content text-lg mx-auto max-w-4xl" dangerouslySetInnerHTML={{ __html: post.html }} />
+
+        <div className="max-w-4xl mx-auto border-t border-gray-200 mt-12 pt-8">
+          <ShareButtons url={`https://nyayniti.in/blog/${post.slug}`} title={post.title} />
+        </div>
 
         {post.tags.length > 0 && (
           <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto border-t border-gray-200 mt-12 pt-6">
