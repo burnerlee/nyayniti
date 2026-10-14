@@ -1,0 +1,26 @@
+{
+  "/": {
+    "title": "NyayNiti – Matrimonial & Criminal Law Firm in New Delhi",
+    "description": "NyayNiti is a New Delhi law firm handling matrimonial disputes, criminal defence, civil, constitutional and IP matters. Book a free consultation.",
+    "h1": "NyayNiti – Law Firm in New Delhi",
+    "preload": "hero-home"
+  },
+  "/about": {
+    "title": "About NyayNiti – Our Advocates & Mission | New Delhi",
+    "description": "Meet the advocates behind NyayNiti, a New Delhi law firm built on collaboration, innovation and cost-effective legal representation.",
+    "h1": "About NyayNiti",
+    "preload": "aboutus"
+  },
+  "/contact": {
+    "title": "Contact NyayNiti – Free Legal Consultation in New Delhi",
+    "description": "Book a free consultation with NyayNiti. Visit us in Lajpat Nagar IV, New Delhi, email nyaynitilegal@gmail.com or message us on WhatsApp.",
+    "h1": "Contact NyayNiti",
+    "preload": "contact"
+  },
+  "/blog": {
+    "title": "Legal Blog – Indian Law Explained by Advocates | NyayNiti",
+    "description": "Plain-language explainers on Indian criminal and matrimonial law, Supreme Court judgments and your legal rights, written by the advocates at NyayNiti.",
+    "h1": "NyayNiti Legal Blog",
+    "preload": "blog"
+  }
+}

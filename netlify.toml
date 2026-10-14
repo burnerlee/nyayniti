@@ -2,13 +2,19 @@
   command = "npm run build"
   publish = "dist"
 
-# Prerendered files in dist/ win over this; everything else falls back to the SPA.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Every route is prerendered to a real file, so unknown URLs fall through to dist/404.html (404 status).
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/blog-images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/attorney-images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
