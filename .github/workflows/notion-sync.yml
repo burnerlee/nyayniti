@@ -3,7 +3,7 @@ name: Sync Notion content
 # Pulls blogs + attorneys from Notion; a commit to main triggers the Netlify deploy.
 on:
   schedule:
-    - cron: '0 * * * *' # hourly
+    - cron: '23 * * * *' # hourly; off the :00 peak, where GitHub drops or delays scheduled runs
   workflow_dispatch:
 
 permissions:
