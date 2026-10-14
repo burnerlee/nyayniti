@@ -1,0 +1,35 @@
+{
+  "heading": "Meet Our Attorneys",
+  "attorneys": [
+    {
+      "name": "Adv. Shubham Kumar",
+      "title": "FOUNDER",
+      "image": "/attorney-images/0f2727564a94.webp"
+    },
+    {
+      "name": "Adv. Anubhav Jain",
+      "title": "CO-FOUNDER",
+      "image": "/attorney-images/b2851e377230.webp"
+    },
+    {
+      "name": "Adv. Udit wadhwa",
+      "title": "ASSOCIATE",
+      "image": "/attorney-images/d84af509f04b.webp"
+    },
+    {
+      "name": "Ms. Rimmi Panjrath",
+      "title": "PARALEGAL",
+      "image": "/attorney-images/6132f7f56bbf.webp"
+    },
+    {
+      "name": "Mr. Dev Malik",
+      "title": "ASSOCIATE",
+      "image": "/attorney-images/5af4ea191dd3.webp"
+    },
+    {
+      "name": "Mr. Rishabh Rajpoot",
+      "title": "ASSOCIATE",
+      "image": "/attorney-images/7f498fba0adf.webp"
+    }
+  ]
+}
