@@ -3,8 +3,80 @@ import React, { useState, useEffect } from 'react';
 interface Video {
   url: string;
   videoId: string;
-  title: string;
+  title: string | null; // null until its oEmbed request settles
 }
+
+const SKELETON_COUNT = 6;
+
+const Spinner: React.FC = () => (
+  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gold" />
+);
+
+// Same footprint as a real card, so the grid doesn't change size when data arrives.
+const VideoSkeleton: React.FC = () => (
+  <div className="flex flex-col">
+    <div className="aspect-video w-full bg-gray-100 flex items-center justify-center">
+      <Spinner />
+    </div>
+    <div className="mt-4 space-y-2 animate-pulse">
+      <div className="h-5 bg-gray-200 rounded w-11/12" />
+      <div className="h-5 bg-gray-200 rounded w-2/3" />
+    </div>
+  </div>
+);
+
+const VideoCard: React.FC<{ video: Video }> = ({ video }) => {
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [thumb, setThumb] = useState(`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`);
+
+  return (
+    <div className="flex flex-col">
+      <a
+        href={`https://www.youtube.com/watch?v=${video.videoId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block relative aspect-video w-full bg-gray-100 overflow-hidden"
+      >
+        {!imgLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Spinner />
+          </div>
+        )}
+        <img
+          src={thumb}
+          alt={video.title ?? 'YouTube video'}
+          loading="lazy"
+          onLoad={(e) => {
+            // maxresdefault is missing for some videos; YouTube then serves a 120px placeholder.
+            if (e.currentTarget.naturalWidth <= 120 && thumb.includes('maxresdefault')) {
+              setThumb(`https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`);
+              return;
+            }
+            setImgLoaded(true);
+          }}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+        />
+        {imgLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-16 h-12 flex items-center justify-center bg-red-600 rounded-lg">
+              <svg viewBox="0 0 24 24" fill="white" className="w-8 h-8">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        )}
+      </a>
+      {video.title === null ? (
+        <div className="mt-4 space-y-2 animate-pulse">
+          <div className="h-5 bg-gray-200 rounded w-11/12" />
+          <div className="h-5 bg-gray-200 rounded w-2/3" />
+        </div>
+      ) : (
+        <h3 className="text-xl font-bold mt-4">{video.title}</h3>
+      )}
+    </div>
+  );
+};
 
 const YouTubeVideos: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -12,6 +84,7 @@ const YouTubeVideos: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
     const fetchVideos = async () => {
       try {
         setLoading(true);
@@ -22,44 +95,40 @@ const YouTubeVideos: React.FC = () => {
         }
         
         const csvText = await response.text();
-        const parsedVideos = await parseCSV(csvText);
-        setVideos(parsedVideos);
+        const parsed = parseCSV(csvText);
+        setVideos(parsed);
+        setLoading(false);
+
+        // Titles arrive independently; each card swaps its skeleton for text when ready.
+        parsed.forEach(async (video) => {
+          const title = (await fetchVideoTitle(video.videoId)) || 'YouTube Video';
+          if (!cancelled) {
+            setVideos((prev) => prev.map((v) => (v.videoId === video.videoId ? { ...v, title } : v)));
+          }
+        });
       } catch (err) {
         console.error('Error fetching videos:', err);
         setError('Failed to load videos. Please try again later.');
-      } finally {
         setLoading(false);
       }
     };
 
     fetchVideos();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  const parseCSV = async (csvText: string): Promise<Video[]> => {
-    // Split by lines and remove header
-    const lines = csvText.split('\n').filter(line => line.trim() !== '');
-    const header = lines[0];
-    const dataLines = lines.slice(1);
-    
-    const videoPromises = dataLines.map(async (line) => {
-      const url = line.trim();
-      // Extract video ID from YouTube URL
-      const videoId = extractVideoId(url);
-      
-      if (!videoId) return null;
-      
-      // Fetch video title from YouTube API
-      const title = await fetchVideoTitle(videoId);
-      
-      return {
-        url,
-        videoId,
-        title: title || 'YouTube Video' // Fallback title if API fails
-      };
-    });
-    
-    const videos = await Promise.all(videoPromises);
-    return videos.filter(video => video !== null) as Video[];
+  const parseCSV = (csvText: string): Video[] => {
+    const lines = csvText.split('\n').filter((line) => line.trim() !== '');
+    return lines
+      .slice(1) // header
+      .map((line) => {
+        const url = line.trim();
+        const videoId = extractVideoId(url);
+        return videoId ? { url, videoId, title: null } : null;
+      })
+      .filter((v): v is Video => v !== null);
   };
 
   const fetchVideoTitle = async (videoId: string): Promise<string> => {
@@ -136,8 +205,10 @@ const YouTubeVideos: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gold"></div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8" aria-busy="true">
+        {Array.from({ length: SKELETON_COUNT }, (_, i) => (
+          <VideoSkeleton key={i} />
+        ))}
       </div>
     );
   }
@@ -166,35 +237,8 @@ const YouTubeVideos: React.FC = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {videos.map((video, index) => (
-        <div key={index} className="flex flex-col">
-          <div className="relative">
-            <a 
-              href={`https://www.youtube.com/watch?v=${video.videoId}`} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="block relative"
-            >
-              <img 
-                src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} 
-                alt={video.title}
-                className="w-full h-auto"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-12 flex items-center justify-center bg-red-600 rounded-lg">
-                  <svg 
-                    viewBox="0 0 24 24" 
-                    fill="white" 
-                    className="w-8 h-8"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-              </div>
-            </a>
-          </div>
-          <h3 className="text-xl font-bold mt-4">{video.title}</h3>
-        </div>
+      {videos.map((video) => (
+        <VideoCard key={video.videoId} video={video} />
       ))}
     </div>
   );
