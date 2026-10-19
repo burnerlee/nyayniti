@@ -37,7 +37,7 @@ const ContactHero: React.FC = () => {
                 href="tel:+918375887003" 
                 className="inline-flex items-center justify-center border border-white text-white px-6 py-4 hover:bg-white hover:text-dark-bg transition-colors hover:text-black"
               >
-                or +91 8375887003
+                +91 8375887003
               </a>
             </div>
           </div>
