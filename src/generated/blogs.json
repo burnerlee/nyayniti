@@ -180,7 +180,7 @@
         "driving-taxi-person-having-ganja",
         "driving-car-person-having-ganjanarcotics"
       ],
-      "title": "“Driving Car With person carrying     Ganja/Narcotics is Not a Crime”",
+      "title": "“Driving Car with person carrying     Ganja/Narcotics is Not a Crime” ?",
       "excerpt": "Introduction: Can a Taxi Driver Be Convicted for Contraband Found in the Vehicle? Can a taxi driver be convicted under the Narcotic Drugs and Psychotropic Su...",
       "date": "2026-10-15",
       "updated": "2026-10-23",
@@ -460,12 +460,14 @@
     },
     {
       "id": "400db0b3-b959-8069-b265-fe546a73bd7b",
-      "slug": "no-injuries-not-mean-no-sexual",
-      "aliases": [],
-      "title": "No Injuries Does Not Mean No Sexual Assault in Child Sexual Assault Case (POCSO)",
+      "slug": "whether-no-injuries-mean-no-sexual",
+      "aliases": [
+        "no-injuries-not-mean-no-sexual"
+      ],
+      "title": "Whether No Injuries Mean No Sexual Assault in Child Sexual Assault Case (POCSO)?",
       "excerpt": "Introduction Can the absence of visible physical injuries justify granting bail to a person accused of sexually assaulting a three-year-old child? Can a youn...",
       "date": "2026-10-21",
-      "updated": "2026-10-21",
+      "updated": "2026-10-23",
       "author": "Adv. Anubhav Jain",
       "tags": [],
       "cover": "/blog-images/80386e435062.webp",
