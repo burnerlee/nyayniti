@@ -676,9 +676,11 @@
     },
     {
       "id": "40cdb0b3-b959-80cd-b92c-f084970e806b",
-      "slug": "three-language-policy-cbse",
-      "aliases": [],
-      "title": "Three Language Policy by CBSE",
+      "slug": "understanding-three-language-policy-cbse",
+      "aliases": [
+        "three-language-policy-cbse"
+      ],
+      "title": "Understanding Three Language Policy by CBSE",
       "excerpt": "Supreme Court questions Three Language Policy by CBSE When educational boards introduce new policies, the ultimate goal is to improve learning. But what happ...",
       "date": "2026-11-02",
       "updated": "2026-11-02",
@@ -718,9 +720,11 @@
     },
     {
       "id": "40cdb0b3-b959-8069-88c6-db6432ae4205",
-      "slug": "not-under-arrest-just-being-detained",
-      "aliases": [],
-      "title": "\"You Are Not Under Arrest, You Are Just Being Detained\": Understanding Your Rights",
+      "slug": "arrest-or-detained",
+      "aliases": [
+        "not-under-arrest-just-being-detained"
+      ],
+      "title": "\"Arrest or Detained\": Understanding Your Rights",
       "excerpt": "Imagine you are participating in a peaceful public demonstration. Suddenly, the police approach, restrict your movement, and ask you to sit in a police van. ...",
       "date": "2026-11-02",
       "updated": "2026-11-02",
