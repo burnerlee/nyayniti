@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { setTimeout as sleep } from 'node:timers/promises';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const OUT_FILE = path.join(ROOT, 'src/generated/blogs.json');
@@ -13,6 +14,9 @@ const ATTORNEYS_FILE = path.join(ROOT, 'src/generated/attorneys.json');
 const ATTORNEYS_IMG_DIR = path.join(ROOT, 'public/attorney-images');
 const ATTORNEYS_TITLE_RE = new RegExp(process.env.NOTION_ATTORNEYS_TITLE_REGEX || '^\\s*meet our attorneys\\s*$', 'i');
 const NOTION_VERSION = '2022-06-28';
+const NOTION_REQUEST_INTERVAL_MS = 400;
+const NOTION_MAX_RETRIES = 4;
+let nextNotionRequestAt = 0;
 
 loadDotEnv();
 const { NOTION_TOKEN, NOTION_BLOG_PARENT_ID } = process.env;
@@ -33,7 +37,7 @@ function loadDotEnv() {
 }
 
 async function notion(endpoint, body) {
-  const res = await fetch(`https://api.notion.com/v1/${endpoint}`, {
+  const options = {
     method: body ? 'POST' : 'GET',
     headers: {
       Authorization: `Bearer ${NOTION_TOKEN}`,
@@ -41,9 +45,28 @@ async function notion(endpoint, body) {
       'Content-Type': 'application/json',
     },
     body: body ? JSON.stringify(body) : undefined,
-  });
-  if (!res.ok) throw new Error(`Notion ${endpoint} -> ${res.status} ${await res.text()}`);
-  return res.json();
+  };
+
+  for (let attempt = 0; ; attempt++) {
+    // Leave headroom under Notion's three-request-per-second average.
+    const wait = Math.ceil(nextNotionRequestAt - performance.now());
+    if (wait > 0) await sleep(wait);
+    nextNotionRequestAt = performance.now() + NOTION_REQUEST_INTERVAL_MS;
+
+    const res = await fetch(`https://api.notion.com/v1/${endpoint}`, options);
+    if (res.ok) return res.json();
+
+    const error = await res.text();
+    if (res.status !== 429 || attempt >= NOTION_MAX_RETRIES) {
+      throw new Error(`Notion ${endpoint} -> ${res.status} ${error}`);
+    }
+
+    const retryAfter = res.headers.get('retry-after')?.trim() ?? '';
+    const retryAfterMs = /^\d+$/.test(retryAfter) ? Number(retryAfter) * 1000 : 0;
+    const delay = Math.max(retryAfterMs, 1000 * 2 ** attempt) + Math.floor(Math.random() * 250);
+    console.warn(`[notion] ${endpoint} rate limited, retrying in ${delay} ms`);
+    await sleep(delay);
+  }
 }
 
 async function paginate(endpoint, body) {
@@ -279,8 +302,11 @@ async function main() {
   let pages;
   if (NOTION_BLOG_PARENT_ID) {
     const children = await paginate(`blocks/${NOTION_BLOG_PARENT_ID}/children?page_size=100`);
-    pages = await Promise.all(children.filter((b) => b.type === 'child_page').map((b) => notion(`pages/${b.id}`)));
-    pages = pages.filter((pg) => !pg.archived);
+    pages = [];
+    for (const child of children.filter((b) => b.type === 'child_page')) {
+      const page = await notion(`pages/${child.id}`);
+      if (!page.archived) pages.push(page);
+    }
   } else {
     console.warn('[notion] NOTION_BLOG_PARENT_ID not set, using every top-level page as a post');
     pages = topLevel.filter((pg) => pg !== attorneysPage && TITLE_RE.test(titleOf(pg)));
