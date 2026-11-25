@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Footer from '../components/Footer';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Search, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import YouTubeVideos from '../components/YouTubeVideos';
 import InstagramPosts from '../components/InstagramPosts';
@@ -16,6 +16,13 @@ const lowQualityImage = "lowblog.webp"
 
 const BlogPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'blogs' | 'videos'>('blogs');
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchInput = useRef<HTMLInputElement>(null);
+  const searchTerms = searchQuery.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const matchingPosts = searchTerms.length === 0 ? blogPosts : blogPosts.filter(post => {
+    const searchableText = [post.title, post.excerpt, ...post.tags].join(' ').toLowerCase();
+    return searchTerms.every(term => searchableText.includes(term));
+  });
   useSeo(pages['/blog'].title, pages['/blog'].description);
   
   return (
@@ -60,7 +67,50 @@ const BlogPage: React.FC = () => {
       <div className="container mx-auto max-w-7xl px-6 md:px-12 py-24">
         {activeTab === 'blogs' ? (
           <>
-            <h2 className="text-3xl font-playfair font-bold mb-12 text-center">Featured blog posts</h2>
+            <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-8">
+              <h2 className="text-center text-3xl font-playfair font-bold sm:text-left">Featured blog posts</h2>
+
+              {blogPosts.length > 0 && (
+                <div
+                  role="search"
+                  aria-label="Blog posts"
+                  className="relative w-full max-w-md shrink-0 rounded-md shadow-md shadow-gray-900/10 transition-shadow focus-within:shadow-lg sm:ml-auto sm:w-64 md:w-80 lg:w-96"
+                >
+                  <label htmlFor="blog-search" className="sr-only">Search blog posts</label>
+                  <Search size={20} aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+                  <input
+                    ref={searchInput}
+                    id="blog-search"
+                    type="search"
+                    placeholder="Search blog posts…"
+                    value={searchQuery}
+                    onChange={event => setSearchQuery(event.target.value)}
+                    className="w-full rounded-md border border-gray-400 bg-white py-3 pl-12 pr-12 text-gray-800 placeholder:text-gray-500 focus:border-darkGold focus:outline-none focus:ring-1 focus:ring-darkGold [&::-webkit-search-cancel-button]:appearance-none"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      aria-label="Clear search"
+                      onClick={() => {
+                        setSearchQuery('');
+                        searchInput.current?.focus();
+                      }}
+                      className="absolute inset-y-0 right-0 flex w-12 items-center justify-center rounded-r-md text-gray-600 hover:text-darkGold focus-visible:outline-darkGold"
+                    >
+                      <X size={18} aria-hidden="true" />
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {blogPosts.length > 0 && (
+              <p role="status" className={matchingPosts.length === 0 ? 'py-12 text-center text-gray-600' : 'sr-only'}>
+                {matchingPosts.length === 0
+                  ? 'No blog posts found. Try a different search.'
+                  : `${matchingPosts.length} blog ${matchingPosts.length === 1 ? 'post' : 'posts'} found.`}
+              </p>
+            )}
 
             {blogPosts.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20">
@@ -70,9 +120,9 @@ const BlogPage: React.FC = () => {
                 </p>
                 <div className="mt-8 w-24 h-1 bg-gold"></div>
               </div>
-            ) : (
+            ) : matchingPosts.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
-                {blogPosts.map(post => (
+                {matchingPosts.map(post => (
                   <article key={post.slug} className="bg-white border border-gray-200 hover:shadow-lg transition-shadow flex flex-col">
                     {post.cover && (
                       <Link to={`/blog/${post.slug}`}>
